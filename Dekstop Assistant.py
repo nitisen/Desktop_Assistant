@@ -1,22 +1,26 @@
-import pyttsx3
+import pyttsx3 # A python library that will help us to convert text to speech.
 import datetime
 import speech_recognition as sr
-import wikipedia
-import webbrowser
+import wikipedia # To do Wikipedia searches, we need to install and import the Wikipedia module into our program.
+import webbrowser # To open any website, we need to import a module called webbrowser.
 import os
 import random
 
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-#print(voices[0].id)
+
 engine.setProperty('voice',voices[0].id)
 
 def speak(audio):
+    '''this function will take audio as an argument, and then it will
+     pronounce it.'''
     engine.say(audio)
-    engine.runAndWait()
+    engine.runAndWait() #Without this command, speech will not be audible to us.
 
 def wishMe():
+    ''' wish or greet the user according to the time of computer. '''
+
     hour = int(datetime.datetime.now().hour)
     if hour>=0 and hour<12:
         speak("Good Morning Nitika!")
@@ -28,6 +32,8 @@ def wishMe():
     speak("I am your Desktop Assistant, Please tell me how may i help you")
 
 def takeCommand():
+    ''' It takes microphone input from the user and returns string output.'''
+
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening....")
@@ -89,7 +95,7 @@ if __name__ == '__main__':
             speak(f"Nitika, the date is {strdate}")
 
         elif 'open code' in query:
-            code_path = "C:\\Program Files\\JetBrains\PyCharm Community Edition 2021.3\\bin\pycharm64.exe"
+            code_path = "C:\\Users\This PC\\AppData\Roaming\\Microsoft\Windows\\Start Menu\\Programs\\Visual Studio Code"
             os.startfile(code_path)
 
         elif 'quit' in query:
